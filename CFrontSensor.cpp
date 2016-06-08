@@ -76,28 +76,30 @@ void isort(int *a, int n)
 
 
 //Mode function, returning the mode or median.
-int mode(int *x,int n){
-	int i = 0;
-	int count = 0;
-	int maxCount = 0;
-	int mode = 0;
-	int bimodal;
-	int prevCount = 0;
+int mode(int *array,int size){
+	int number = array[0];
+	int mode = number;
+	int count = 1;
+	int countMode = 1;
 
-	while(prevCount&count>maxCount){
-		mode=x[i];
-		maxCount=count;
-		bimodal=0;
+	for (int i=1; i<size; i++)
+	{
+	      if (array[i] == number)
+	      { // count occurrences of the current number
+	         countMode++;
+	      }
+	      else
+	      { // now this is a different number
+	            if (count > countMode)
+	            {
+	                  countMode = count; // mode is the biggest ocurrences
+	                  mode = number;
+	            }
+	           count = 1; // reset count for the new number
+	           number = array[i];
+	  }
 	}
-	if(count==0){
-		i++;
-	}
-	if(count==maxCount){//If the dataset has 2 or more modes.
-		bimodal=1;
-	}
-	if(mode==0||bimodal==1){//Return the median if there is no mode.
-		mode=x[(n/2)];
-	}
+
 	return mode;
 }
 
