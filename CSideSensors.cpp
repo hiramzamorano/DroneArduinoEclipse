@@ -9,9 +9,9 @@
 
 CSideSensors::CSideSensors() {
 	// TODO Auto-generated constructor stub
-	pinMode(trigPin, OUTPUT);
-	 pinMode(echoPin, INPUT);
-	 pinMode(LEDPin, OUTPUT); // Use LED indicator (if required)
+	pinMode(TRIGPIN, OUTPUT);
+	 pinMode(ECHOPIN, INPUT);
+	// pinMode(LEDPIN, OUTPUT); // Use LED indicator (if required)
 }
 
 CSideSensors::~CSideSensors() {
@@ -26,14 +26,14 @@ long CSideSensors::read_distance() {
 
 /* The following trigPin/echoPin cycle is used to determine the
  distance of the nearest object by bouncing soundwaves off of it. */
- digitalWrite(trigPin, LOW);
+ digitalWrite(TRIGPIN, LOW);
  delayMicroseconds(2);
 
- digitalWrite(trigPin, HIGH);
+ digitalWrite(TRIGPIN, HIGH);
  delayMicroseconds(10);
 
- digitalWrite(trigPin, LOW);
- duration = pulseIn(echoPin, HIGH);
+ digitalWrite(TRIGPIN, LOW);
+ duration = pulseIn(ECHOPIN, HIGH);
 
  //Calculate the distance (in cm) based on the speed of sound.
  distance = duration/58.2;
