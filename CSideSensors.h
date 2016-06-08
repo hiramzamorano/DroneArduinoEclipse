@@ -12,8 +12,14 @@
 class CSideSensors {
 public:
 	CSideSensors();
-	long read_distance();
+	void init_pins(unsigned char EchoPinNumber,unsigned char TrigPinNumber);
+	short read_distance_raw();
+	short read_median_Filter(unsigned char BufferSize,unsigned char read_delay);
+	short read_limit_Filter(short Filter_UpperLimit,short Filter_LowerLimit,unsigned char read_delay);
 	virtual ~CSideSensors();
+private:
+	unsigned char m_trigPin,m_echoPin;
+
 };
 
 #endif /* CSIDESENSORS_H_ */
