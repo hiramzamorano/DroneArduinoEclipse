@@ -23,9 +23,9 @@ void loop()
 //CMAV MAVlink;
 int sensor1, sensor2, sensor3;
 
-sensor1=PMOD1.read_sensor();
-sensor2=PMOD2.read_sensor();
-sensor3=PMOD3.read_sensor();
+sensor1=PMOD1.read_sensor_Filtered(5,50);
+sensor2=PMOD2.read_sensor_Filtered(5,50);
+sensor3=PMOD3.read_sensor_Filtered(5,50);
 
 Serial.print("S1");
 Serial.print(" : ");

@@ -14,6 +14,7 @@ public:
 	void Pin_init(unsigned char PWpinnum,unsigned char TRIGpinnum);
 	virtual ~CFrontSensor();
 	int read_sensor();
+	int read_sensor_Filtered(unsigned char arraysize, unsigned char read_delay );
 private:
 	unsigned char	m_PWpinNumber;
 	unsigned char	m_TRIGpinNumber;

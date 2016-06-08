@@ -6,19 +6,21 @@
  */
 
 #include "CFrontSensor.h"
+void isort(int *a, int n);
+int mode(int *x,int n);
 
 CFrontSensor::CFrontSensor()
 {
 	m_PWpinNumber=0;
-		 m_TRIGpinNumber=0;
+	m_TRIGpinNumber=0;
 
 }
 void CFrontSensor::Pin_init(unsigned char PWpinnum,unsigned char TRIGGpinnum) {
 	// TODO Auto-generated constructor stub
-	 pinMode(PWpinnum, INPUT);
-	 pinMode(TRIGGpinnum,OUTPUT);
-	 m_PWpinNumber=PWpinnum;
-	 m_TRIGpinNumber=TRIGGpinnum;
+	pinMode(PWpinnum, INPUT);
+	pinMode(TRIGGpinnum,OUTPUT);
+	m_PWpinNumber=PWpinnum;
+	m_TRIGpinNumber=TRIGGpinnum;
 
 }
 
@@ -33,7 +35,70 @@ int CFrontSensor:: read_sensor(){
 	pulseWidth = pulseIn(m_PWpinNumber, HIGH);
 	distanceinCM = pulseWidth/58;
 	digitalWrite(m_TRIGpinNumber,LOW);
-	delay(20);
 
 	return distanceinCM;
 }
+
+int CFrontSensor::read_sensor_Filtered(unsigned char arraysize, unsigned char read_delay)
+{
+	//declare an array to store the samples. not necessary to zero the array values here, it just makes the code clearer
+	int rangevalue[] = {
+			0, 0, 0, 0, 0, 0, 0, 0, 0};
+		int modE;
+
+	for(int i = 0; i < arraysize; i++)
+	{
+		rangevalue[i] = read_sensor();
+		delay(read_delay);
+	}
+
+	isort(rangevalue,arraysize);
+
+	modE = mode(rangevalue,arraysize);
+	//Serial.print("The mode/median is: ");
+	return modE;
+}
+
+void isort(int *a, int n)
+//  *a is an array pointer function
+{
+	for (int i = 1; i < n; ++i)   {
+		int j = a[i];     int k;
+		for (k = i - 1; (k >= 0) && (j < a[k]); k--)
+		{
+			a[k + 1] = a[k];
+		}
+		a[k + 1] = j;
+	}
+}
+
+//Sorting function
+
+
+//Mode function, returning the mode or median.
+int mode(int *x,int n){
+	int i = 0;
+	int count = 0;
+	int maxCount = 0;
+	int mode = 0;
+	int bimodal;
+	int prevCount = 0;
+
+	while(prevCount&count>maxCount){
+		mode=x[i];
+		maxCount=count;
+		bimodal=0;
+	}
+	if(count==0){
+		i++;
+	}
+	if(count==maxCount){//If the dataset has 2 or more modes.
+		bimodal=1;
+	}
+	if(mode==0||bimodal==1){//Return the median if there is no mode.
+		mode=x[(n/2)];
+	}
+	return mode;
+}
+
+
