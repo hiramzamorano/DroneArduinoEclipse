@@ -6,8 +6,8 @@ int system_type = MAV_TYPE_OCTOROTOR;
 			int system_mode=MAV_MODE_FLAG_MANUAL_INPUT_ENABLED;
 			uint32_t hda_mav_mode=MAV_MODE_PREFLIGHT;
 			int hda_mave_state=MAV_STATE_BOOT;
-			int sys_ID = 255;
-			int comp_ID = 190;
-			int target_ID = 1;
-			int TargetComp_ID1=1;
+			uint8_t sys_ID = 200;
+			uint8_t comp_ID = 100;
+			uint8_t target_ID = 1;
+			uint8_t TargetComp_ID=1;
 #endif

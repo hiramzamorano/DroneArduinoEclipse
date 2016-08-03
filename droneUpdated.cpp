@@ -25,14 +25,12 @@ void loop()
 //Initialize all control variables
 
 
-MAVlink.sent_HeartBeat();
+MAVlink.send_HeartBeat();
 MAVlink.comm_receive();
+
 delay(500);
-//	while(Serial.available() > 0) {
-//Serial.println(" reading");
-//	uint8_t c = Serial.read();
-//				Serial.println(c);
-//	delay(20);}
+MAVlink.start_feeds();
+MAVlink.send_command();
 // Process the input data , create events eg height exceeded threshold , drone too close to object etc
 
 //TODO

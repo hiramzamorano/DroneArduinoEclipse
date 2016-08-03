@@ -15,8 +15,11 @@
 class CMAV {
 public:
 	CMAV(HardwareSerial *SerialPIX,HardwareSerial *SerialDEBUG);
-	bool sent_HeartBeat();
+	bool send_HeartBeat();
 	void comm_receive();
+	void start_feeds();
+	void send_command();
+	void send_message(mavlink_message_t* msg);
 	virtual ~CMAV();
 	HardwareSerial *MegaSerialPIX;
 	HardwareSerial *MegaSerialDEBUG;
