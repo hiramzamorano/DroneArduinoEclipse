@@ -4,12 +4,14 @@
 CFrontSensor PMOD1;
 CFrontSensor PMOD2;
 CFrontSensor PMOD3;
+
 //The setup function is called once at startup of the sketch
 void setup()
 {
 // Add your initialization code here
 	// Serial port inits
-	Serial.begin(9600);
+	Serial.begin(57600); // RX TX with PC
+	Serial1.begin(57600); //RXTX from Pixhawk (Port 18TX,19RX Arduino Mega)
 		// Sensors pin inits
 	PMOD1.Pin_init(PWPIN1,TRIGGERPIN1);
 	PMOD2.Pin_init(PWPIN2,TRIGGERPIN2);
@@ -19,32 +21,18 @@ void setup()
 // The loop function is called in an endless loop
 void loop()
 {
+	CMAV MAVlink(&Serial1,&Serial);
 //Initialize all control variables
-//CMAV MAVlink;
-int sensor1, sensor2, sensor3;
 
-sensor1=PMOD1.read_sensor_Filtered(5,50);
-sensor2=PMOD2.read_sensor_Filtered(5,50);
-sensor3=PMOD3.read_sensor_Filtered(5,50);
 
-Serial.print("S1");
-Serial.print(" : ");
-Serial.print(sensor1);
-Serial.print(" ");
-Serial.print("S2");
-Serial.print(" : ");
-Serial.print(sensor2);
-Serial.print(" ");
-Serial.print("S3");
-Serial.print(" : ");
-Serial.print(sensor3);
-Serial.print(" ");
-Serial.println(" ");
-
-// Update Sensors and control variables periodically
-//MAVlink.sent_HeartBeat();
-//MAVlink.comm_receive();
-
+MAVlink.sent_HeartBeat();
+MAVlink.comm_receive();
+delay(500);
+//	while(Serial.available() > 0) {
+//Serial.println(" reading");
+//	uint8_t c = Serial.read();
+//				Serial.println(c);
+//	delay(20);}
 // Process the input data , create events eg height exceeded threshold , drone too close to object etc
 
 //TODO

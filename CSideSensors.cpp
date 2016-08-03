@@ -6,7 +6,7 @@
  */
 
 #include "CSideSensors.h"
-
+#include <WiFiUdp.h>
 CSideSensors::CSideSensors() {
 }
 void CSideSensors::init_pins(unsigned char EchoPinNumber,unsigned char TrigPinNumber) {
