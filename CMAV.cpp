@@ -6,7 +6,7 @@
  */
 
 #include "CMAV.h"
-
+#include "ProjectMavlinkDefinitons.h"
 CMAV::CMAV(HardwareSerial *SerialPIX,HardwareSerial *SerialDEBUG) {
 	// TODO Auto-generated constructor stub
 	MegaSerialPIX=SerialPIX;
@@ -15,11 +15,7 @@ CMAV::CMAV(HardwareSerial *SerialPIX,HardwareSerial *SerialDEBUG) {
 
 bool CMAV::sent_HeartBeat() {
 	// Define the system type (see mavlink_types.h for list of possible types)
-			int system_type = MAV_TYPE_OCTOROTOR;
-			int autopilot_type = MAV_AUTOPILOT_PX4;
-			int system_mode=MAV_MODE_FLAG_MANUAL_INPUT_ENABLED;
-			uint32_t hda_mav_mode=MAV_MODE_PREFLIGHT;
-			int hda_mave_state=MAV_STATE_BOOT;
+
 
 			// Initialize the required buffers
 			mavlink_message_t msg;

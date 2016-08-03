@@ -11,7 +11,7 @@
 #include "mavlink.h"        // Mavlink interface
 #include "HardwareSerial.h"
 #include "Print.h"
-#include "ProjectMavlinkDefinitons.h"
+
 class CMAV {
 public:
 	CMAV(HardwareSerial *SerialPIX,HardwareSerial *SerialDEBUG);
